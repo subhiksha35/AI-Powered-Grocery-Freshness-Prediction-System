@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Prediction Result</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <main class="container">
+    <section class="hero">
+      <p class="eyebrow">PREDICTION RESULT</p>
+      <h1>Freshness estimate</h1>
+      <p class="subtitle">The result below is the model's best prediction for this image.</p>
+    </section>
+
+    <section class="panel result-panel">
+      <img class="preview" src="{{ image_url }}" alt="Uploaded food image">
+      <p class="result-label">Predicted category</p>
+      <h2>{{ label }}</h2>
+      <p class="confidence">Model confidence: {{ confidence }}%</p>
+      <h3>Class scores</h3>
+      <ul class="scores">
+        {% for item in probabilities %}
+          <li><span>{{ item.label }}</span><strong>{{ item.confidence }}%</strong></li>
+        {% endfor %}
+      </ul>
+      <p class="disclaimer">{{ note }}</p>
+      <a class="button-link" href="{{ url_for('index') }}">Analyze another image</a>
+    </section>
+  </main>
+</body>
+</html>
